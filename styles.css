@@ -14,7 +14,7 @@
   /* neutrals */
   --grey-100: #292826;
   --grey-80: #54524f;
-  --grey-60: #7f7d7a;
+  --grey-60: #6a6865;
   --grey-40: #a9a8a7;
   --grey-20: #d8d7d5;
   --grey-5: #f0eeeb;
@@ -29,7 +29,7 @@
   --teal-20: #a8dcd7;
   --teal-5: #dcf0ee;
   --copper-90: #6b2a0c;
-  --copper-60: #c8571b;
+  --copper-60: #c0521a;
   --copper-40: #e8916a;
   --copper-5: #fbe6d9;
   --slate-60: #4d626b;
@@ -658,6 +658,8 @@ button { font: inherit; color: inherit; }
 }
 .mp-witness-toggle { position: absolute; top: 20px; right: 17px; display: flex; gap: 10px; align-items: center; padding: 8px; border-radius: var(--radius); background: var(--grey-5); cursor: pointer; }
 .mp-witness-switch { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+/* the checkbox itself is transparent, so the pill carries the keyboard focus ring */
+.mp-witness-toggle:has(.mp-witness-switch:focus-visible) { outline: 3px solid var(--copper-60); outline-offset: 2px; }
 .mp-witness-toggle:has(.mp-witness-switch:focus-visible) { outline: 2px solid var(--brand); outline-offset: 3px; }
 .mp-witness-toggle-label { font-size: var(--text-body-lg); font-weight: 600; line-height: 1.2; color: var(--ink); text-transform: uppercase; }
 .mp-witness-track { position: relative; width: 80px; height: 34px; border-radius: 17px; background: var(--copper-60); }

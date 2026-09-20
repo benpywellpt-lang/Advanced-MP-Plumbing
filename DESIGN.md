@@ -13,7 +13,7 @@ Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 8 / VISUAL_DENSITY 4.
 - **Palette.** Paper `#f0eeeb` with 11px dot grid (kept from the reference; the brief is
   an explicit replication, so the warm-paper ban is overridden on purpose). Ink `#292826`.
   Brand petrol `#0f4450` (headings, dark scenes) and `#082a31` (footer). Primary CTA tint
-  `#a8dcd7` with petrol text. One accent, copper `#c8571b`, for every hand-drawn mark,
+  `#a8dcd7` with petrol text. One accent, copper `#c0521a` (4.7:1 under white text), for every hand-drawn mark,
   tape, chip and the heating-ON switch. OFF is cold slate `#4d626b`. Yellow only as the
   second chip tint and the review stars. `--error` red is reserved for form validation.
   The client has no existing identity (Trellix template site), so this palette is ours.
