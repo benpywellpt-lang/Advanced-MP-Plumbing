@@ -173,6 +173,32 @@
     lastY = y;
   };
 
+  /* ---------- call bar: shows once the hero has gone, and steps aside whenever a
+     section CTA, the form or the footer is already on screen ---------- */
+  const callbar = document.querySelector(".mp-callbar");
+  const heroStage = document.querySelector(".mp-stage-hero");
+  const ctasInView = new Set();
+  let heroInView = true, barOn = null;
+  const updateBar = () => {
+    if (!callbar) return;
+    const heroGone = runway.offsetParent === null || (on ? !!main.dataset.heroOut : !heroInView);
+    const show = heroGone && ctasInView.size === 0;
+    if (show === barOn) return;
+    barOn = show;
+    main.dataset.callbar = show ? "on" : "off";
+    callbar.inert = !show;
+  };
+  if (callbar) {
+    // every load starts on the hero, so start hidden rather than flash in before the observers report
+    barOn = false; main.dataset.callbar = "off"; callbar.inert = true;
+    const ctaIO = new IntersectionObserver((entries) => {
+      for (const e of entries) e.isIntersecting ? ctasInView.add(e.target) : ctasInView.delete(e.target);
+      updateBar();
+    }, { rootMargin: "0px 0px -76px 0px" });
+    for (const el of document.querySelectorAll(".mp-after .btn, .mp-fact-pill, .mp-form, .mp-footer")) ctaIO.observe(el);
+    new IntersectionObserver(([e]) => { heroInView = e.isIntersecting; updateBar(); }).observe(heroStage);
+  }
+
   /* ---------- main loop ---------- */
   let on = false, raf = 0, frozen = false;
   const frame = () => {
@@ -182,6 +208,7 @@
     for (const s of sections) if (s.live) scrubSection(s);
     scrubRail();
     scrubNav();
+    updateBar();
   };
   const tick = () => { if (!raf) raf = requestAnimationFrame(frame); };
   const measureAll = () => { measureRunway(); measureSections(); measureDeck(); measureRail(); tick(); };
@@ -247,7 +274,6 @@
   /* ---------- hero: the tape swaps the winter evening for a summer morning ---------- */
   const egg = document.querySelector("[data-hero-egg]");
   const altShot = document.querySelector(".mp-hero-alt");
-  const heroStage = document.querySelector(".mp-stage-hero");
   if (egg && altShot && heroStage) {
     let flipped = false;
     egg.addEventListener("click", () => {

@@ -179,9 +179,9 @@ button { font: inherit; color: inherit; }
 }
 .accred svg { flex: none; width: 18px; height: 18px; color: var(--brand); }
 .accred-logos { display: inline-flex; align-items: center; gap: 14px; flex: none; }
-.accred-logos img { display: block; width: auto; height: 32px; }
+.accred-logos img { display: block; width: auto; height: 48px; border-radius: var(--radius-sm); }
 .mp-meet-accred { flex-basis: 100%; margin: 0; flex-wrap: wrap; gap: 8px 16px; }
-@media (max-width: 767.9px) { .accred-logos img { height: 28px; } }
+@media (max-width: 767.9px) { .accred-logos img { height: 44px; } }
 @media (min-width: 768px) { .mp-meet-cta { flex-wrap: wrap; row-gap: 20px; } }
 .mp-crew-sub {
   position: relative; z-index: 2; max-width: 342px; margin-top: 14px;
@@ -190,6 +190,10 @@ button { font: inherit; color: inherit; }
 }
 @media (min-width: 768px) { .mp-crew-sub { max-width: 476px; } }
 .mp-x .mp-crew-sub { opacity: var(--w); transform: translateY(calc((1 - var(--wo)) * 14px)); }
+.mp-crew-sub:has(.mp-crew-badge) { display: flex; align-items: center; gap: 14px; }
+.mp-crew-badge { flex: none; width: auto; height: 52px; border-radius: var(--radius-sm); }
+.mp-footer-badge { display: flex; align-items: center; gap: 12px; }
+.mp-footer-badge img { flex: none; width: auto; height: 56px; border-radius: var(--radius-sm); }
 .mp-footer-accred { color: color-mix(in srgb, var(--white) 80%, transparent); font-weight: 600; }
 
 /* ---------- Marker underline (red brush stroke) ---------- */
@@ -1074,6 +1078,28 @@ button { font: inherit; color: inherit; }
 /* ==========================================================================
    Reduced motion: everything lays out statically, no scrubbing
    ========================================================================== */
+/* --- Call bar (below 1024px, where the nav has no phone button) ---
+   Visible by default so it still works without JS. The script turns it off over the hero
+   and whenever a section CTA, the form or the footer is already on screen. */
+.mp-callbar {
+  --callbar-h: 68px;
+  position: fixed; left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom, 0px)); z-index: 45;
+  display: grid; grid-template-columns: 1.25fr 1fr; gap: 8px; padding: 8px;
+  border-radius: var(--radius-lg); background: color-mix(in srgb, var(--paper) 94%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 10px 32px color-mix(in srgb, var(--petrol-100) 28%, transparent), 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent);
+  transition: transform .4s var(--ease-settle), opacity .25s ease, visibility 0s;
+}
+.mp-callbar .btn { min-width: 0; padding-inline: 10px; }
+.mp[data-callbar="off"] .mp-callbar { transform: translateY(calc(100% + 24px)); opacity: 0; visibility: hidden; transition: transform .3s var(--ease-smooth), opacity .2s ease, visibility 0s .3s; }
+@media (max-width: 359.9px) { .mp-callbar .btn { font-size: var(--text-body-md); } }
+@media (min-width: 1024px) { .mp-callbar { display: none; } }
+@media (max-width: 1023.9px) {
+  /* the switch scene has no CTA of its own, so the bar sits over it: lift the services row clear */
+  .mp-x .mp-witness-press { padding-bottom: calc(68px + max(8px, env(safe-area-inset-bottom, 0px)) + 14px); }
+}
+@media (prefers-reduced-transparency: reduce) { .mp-callbar { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
 @media (prefers-reduced-motion: reduce) {
   .mp-grain, .mp-witness-press-track { animation: none; }
   .mp-hero-poster, .mp-hero-soft, .mp-hero-tape, .mp-hero-title, .mp-hero-cta, .mp-hero-card { animation: none; }

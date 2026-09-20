@@ -27,9 +27,13 @@ Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 8 / VISUAL_DENSITY 4.
 - **The switch.** "Heating ON / OFF": the same cutaway house, warm and lit vs. cold and
   blue. The OFF image was generated as an edit of the ON image so the two register.
   The finale inverts the reference: a cold wash lifts and the street warms up.
+- **Call bar.** Below 1024px the nav has no phone button and hides on scroll, so a floating
+  bar (Call + Free estimate) fills the gaps: it appears once the hero has gone and steps
+  aside whenever a section CTA, the form or the footer is on screen. Never two CTAs stacked.
 - **Logo.** None exists. The nav uses a type lockup with a simple droplet mark.
 - **Imagery.** The live site has no photography at all (only a Gas Safe badge and an
-  IoP logo), so every photo, illustration and icon is a generated stand-in.
+  IoP logo), so every photo, illustration and icon is a generated stand-in. The Gas Safe badge is
+  the one real asset, taken from the client's site.
 
 ## Verified facts vs. deliberate omissions
 
